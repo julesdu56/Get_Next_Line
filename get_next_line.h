@@ -6,14 +6,14 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 11:27:30 by jumourot          #+#    #+#             */
-/*   Updated: 2019/05/28 14:45:12 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/05/29 12:24:45 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 32
-#define MAX_OPEN 4896
+# define MAX_OPEN 4896
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>

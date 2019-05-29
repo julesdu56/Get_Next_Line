@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 18:29:40 by jumourot          #+#    #+#             */
-/*   Updated: 2019/05/28 15:27:34 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/05/29 16:52:31 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_strichr(char *str, int c)
 	return (i);
 }
 
-int		checkeof(char *buff)
+int		checkeof(char *stock)
 {
 	if (ft_strchr(buff, '\n'))
 	{
@@ -42,19 +42,22 @@ int		checkeof(char *buff)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char *mult[MAX_OPEN];
-	char		*tmp;
-	int 		i;
-	char		buf[BUFF_SIZE]
+	static char		*stock[MAX_OPEN]
+	int				i;
+	char			*tmp;
+	char			buff[BUFF_SIZE + 1];
 
-	if (fd > MAX_OPEN || fd < 0 || BUFF_SIZE < 1 || !line 
-			|| read(fd, buf, 0) == -1)
+	if (fd < 0 || fd > MAX_OPEN || !line || BUFF_SIZE < 1 
+			|| read(fd, buff, 0) == -1)
 		return (-1);
-	if (!mult[fd])
-		mult[fd] == NULL;
-	while (read(fd, buf, BUFF_SIZE) && ft_strchr(line, '\n))
+	if (!stock[fd])
+		stock[fd] == NULL;
+	while (ft_strchr(line, '\n') && i = read(fd, line, BUFF_SIZE) = 1)
 	{
-		
+		buff[i] = '\0';
+		*tmp = stock[fd];
+		if(!stock[fd] = ft_strjoin(tmp, buff))
+				return (-1);
+		free(ptr);
 	}
-	return (0);
-}
+	
