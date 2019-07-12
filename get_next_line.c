@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include "libft/libft.h"
+#include <unistd.h>
+
 
 void		ft_strichr(char *str, char c)
 {
@@ -13,24 +16,31 @@ void		ft_strichr(char *str, char c)
 
 int		ft_gnl(char *str, char **line)
 {
-	char	*tmp;	
-	printf("str%s\n", str);
-	if (ft_strchr(str, 'A'))
+	char	*tmp1;
+
+	tmp1 = NULL;	
+	if (ft_strchr(str, '\n'))
 	{
-		tmp = ft_strdup(str);
-		printf("tmp1%s\n", tmp);
-		str = ft_strcpy(str, ft_strchr(str, 'A'));
-		printf("str2%s\n", str);
-		ft_strichr(tmp, 'A');
-		printf("tmp2%s\n", tmp);
+		tmp1 = ft_strdup(str);
+		str = ft_strcpy(str, ft_strchr(str, '\n'));
+		ft_strichr(tmp1, '\n');
+		ft_strjoin(*line, tmp1);
+		free(tmp1);
 	}	
 	return (1);
+	if (!(ft_strchr(str, '\n')))
+	{
+		ft_strjoin(*line ,str);
+		bzero(*line, BUFF_SIZE);
+	}
+	return (0);
 }	
 
-int		main()
+int		get_next_line(const int fd, char **line)
 {
-	char *str = "FGFH A FHGFHG AhfhjA";
- 	char **line;
-	ft_gnl(str, line);
-	return (0);
+	char static	buff[BUFF_SIZE];
+
+	
+	buff = read(fd, line, BUFF_SIZE);
+	ft_gnl(buff, line);
 }
