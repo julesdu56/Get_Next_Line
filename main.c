@@ -1,6 +1,5 @@
-#ifndef GET_NEXT_LINE_C
-# define GET_NEXT_LINE_C
 
+#include "get_next_line.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -19,5 +18,3 @@ int main(int argc, char **argv)
         }
         return (0);
 }
-
-#endif

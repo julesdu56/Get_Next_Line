@@ -1,7 +1,8 @@
-#include <stdio.h>
-#include "libft/libft.h"
-#include <unistd.h>
 
+#include <stdio.h>
+#include <unistd.h>
+#include "libft.h"
+#include "get_next_line.h"
 
 void		ft_strichr(char *str, char c)
 {
@@ -31,16 +32,27 @@ int		ft_gnl(char *str, char **line)
 	if (!(ft_strchr(str, '\n')))
 	{
 		ft_strjoin(*line ,str);
-		bzero(*line, BUFF_SIZE);
+		ft_bzero(*line, BUFF_SIZE);
 	}
 	return (0);
 }	
 
 int		get_next_line(const int fd, char **line)
 {
-	char static	buff[BUFF_SIZE];
+	char		buf[BUFF_SIZE + 1];
+	int			i;
+	char static	*str[MAX_OPEN];
 
 	
-	buff = read(fd, line, BUFF_SIZE);
-	ft_gnl(buff, line);
+	if (fd < 0 || !line || fd > MAX_OPEN 
+			|| BUFF_SIZE < 1 || read(fd, buf, 0) == -1)
+			return (-1);
+	if (!str[fd])
+			return (str[fd]) == NULL;
+	while (!(ft_strchr(str[fd], '\n')) && (i = read(fd, buf, BUFF_SIZE)) > 0)
+	{
+		read(fd, line, BUFF_SIZE);
+		ft_gnl(buf, line);
+	}	
+	return (1);
 }
