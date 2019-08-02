@@ -1,58 +1,56 @@
-
 #include <stdio.h>
-#include <unistd.h>
-#include "libft.h"
 #include "get_next_line.h"
+#include "libft/libft.h"
 
-void		ft_strichr(char *str, char c)
+static size_t		ft_strichr(char *feed, char c)
 {
-	while (str)
-	{
-		if (*str != c && *str)
-			str++;
-		else if (*str == c)
-			str = 0;
-	}
+	size_t i;
+
+	i = 0;
+	if (!feed)
+		return (0);
+	while (feed[i] != c && feed[i] != '\0')
+		i++;
+	return (i);
 }
 
-int		ft_gnl(char *str, char **line)
+static int			ft_checkend(char *feed)
 {
-	char	*tmp1;
-
-	tmp1 = NULL;	
-	if (ft_strchr(str, '\n'))
+	if (ft_strchr(feed, '\n'))
 	{
-		tmp1 = ft_strdup(str);
-		str = ft_strcpy(str, ft_strchr(str, '\n'));
-		ft_strichr(tmp1, '\n');
-		ft_strjoin(*line, tmp1);
-		free(tmp1);
-	}	
-	return (1);
-	if (!(ft_strchr(str, '\n')))
-	{
-		ft_strjoin(*line ,str);
-		ft_bzero(*line, BUFF_SIZE);
+		ft_strcpy(feed, ft_strchr(feed, '\n') + 1);
+		return (0);
 	}
-	return (0);
-}	
-
-int		get_next_line(const int fd, char **line)
-{
-	char		buf[BUFF_SIZE + 1];
-	int			i;
-	char static	*str[MAX_OPEN];
-
-	
-	if (fd < 0 || !line || fd > MAX_OPEN 
-			|| BUFF_SIZE < 1 || read(fd, buf, 0) == -1)
-			return (-1);
-	if (!str[fd])
-			return (str[fd]) == NULL;
-	while (!(ft_strchr(str[fd], '\n')) && (i = read(fd, buf, BUFF_SIZE)) > 0)
+	if (ft_strichr(feed, '\n'))
 	{
-		read(fd, line, BUFF_SIZE);
-		ft_gnl(buf, line);
-	}	
+		ft_strcpy(feed, ft_strchr(feed, '\0'));
+		return (0);
+	}
 	return (1);
+}
+
+int					get_next_line(const int fd, char **line)
+{
+	static char	*feed[MAX_OPEN];
+	int			rd;
+	char		buf[BUFF_SIZE + 1];
+	char		*ptr;
+
+	if (fd < 0 || fd > MAX_OPEN || !line || BUFF_SIZE < 1
+			|| read(fd, buf, 0) == -1)
+		return (-1);
+	if (!feed[fd])
+		feed[fd] = NULL;
+	while (!(ft_strchr(feed[fd], '\n')) && (rd = read(fd, buf, BUFF_SIZE)) > 0)
+	{
+        buf[rd] = '\0';
+		ptr = feed[fd];
+        if (!(feed[fd] = ft_strjoin(ptr, buf)))
+			return (-1);
+		free(ptr);
+	}
+	*line = ft_strsub(feed[fd], 0, ft_strichr(feed[fd], '\n'));
+	if (!ft_checkend(feed[fd]))
+		return (1);
+	return (0);
 }

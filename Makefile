@@ -1,7 +1,7 @@
 CC = Clang
 
 NAME = GNL
-LIB = $(addprefix $(LPATlibft.aaa)
+LIB = $(addprefix $(LPATH), libft.a)
 
 IDIR = libft/
 LPATH = libft/
