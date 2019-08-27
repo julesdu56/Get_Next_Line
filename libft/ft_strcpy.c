@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 07:28:27 by jumourot          #+#    #+#             */
-/*   Updated: 2019/05/13 11:58:35 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/08/27 15:48:41 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strcpy(char *dest, const char *src)
 	int i;
 
 	i = 0;
-	while (src[i])
+	while (src[i] && dest[i])
 	{
 		dest[i] = src[i];
 		i++;

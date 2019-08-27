@@ -23,16 +23,16 @@ $(NAME): $(OBJS) $(LIB)
 
 $(OBJS) : %.o: %.c $(LIB)
 	$(CC) $(CFLAGS) -c $<  -o $@
-		
+
 $(LIB):
 	make -C $(LPATH)
 
 clean:
-		make -C $(LPATH) clean
-		rm -f $(OBJS)
+	make -C $(LPATH) clean
+	rm -f $(OBJS)
 
 fclean: clean
-		make -C $(LPATH) fclean
-		rm -f $(NAME)
+	make -C $(LPATH) fclean
+	rm -f $(NAME)
 
 re: fclean all

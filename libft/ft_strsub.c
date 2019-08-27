@@ -20,8 +20,12 @@ char		*ft_strsub(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (s == NULL || !(str = ft_strnew(len)))
 		return (NULL);
-	while (i < len && s[start])
-		str[i++] = s[start++];
+	while (s[start] && i < len)
+	{
+		str[i] = s[start];
+		i++;
+		start++;
+	}
 	str[i] = '\0';
 	return (str);
 }

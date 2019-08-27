@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 13:22:11 by jumourot          #+#    #+#             */
-/*   Updated: 2019/05/13 07:34:36 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/08/27 15:40:56 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ static char		*ft_concat_all(char *dest, char const *s1, char const *s2)
 		j++;
 	}
 	while (s2[i])
-		dest[j++] = s2[i++];
+	{
+		dest[j] = s2[i];
+		j++;
+		i++;
+	}
 	dest[j] = '\0';
 	return (dest);
 }
@@ -45,7 +49,7 @@ char			*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (ft_strdup(s1));
-	len = (ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1);
+	len = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
 	if (!(dest = malloc(sizeof(char) * len)))
 		return (NULL);
 	ft_concat_all(dest, s1, s2);
