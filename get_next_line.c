@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/29 11:54:56 by jumourot          #+#    #+#             */
+/*   Updated: 2019/08/29 18:27:29 by jumourot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "get_next_line.h"
 #include "libft/libft.h"
@@ -16,6 +28,7 @@ static size_t		ft_strichr(char *str, char c)
 
 static int			ft_checkend(char *str)
 {
+	
 	if (ft_strchr(str, '\n'))
 	{
 		ft_strcpy(str, ft_strchr(str, '\n') + 1);
@@ -31,6 +44,7 @@ static int			ft_checkend(char *str)
 
 int					get_next_line(const int fd, char **line)
 {
+
 	static char	*str[MAX_OPEN];
 	int			i;
 	char		buf[BUFF_SIZE + 1];
@@ -41,16 +55,16 @@ int					get_next_line(const int fd, char **line)
 		return (-1);
 	if (!str[fd])
 		str[fd] = NULL;
-	while (!(ft_strchr(str[fd], '\n')) && (i = read(fd, buf, BUFF_SIZE)) > 0)
+	while (!(ft_strichr(str[fd], '\n')) && (i = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[i] = '\0';
 		ptr = str[fd];
 		if (!(str[fd] = ft_strjoin(ptr, buf)))
-				return (-1);
+			return (-1);
 		free(ptr);
 	}
 	*line = ft_strsub(str[fd], 0, ft_strichr(str[fd], '\n'));
-	if(!ft_checkend(str[fd]))
+	if (!ft_checkend(str[fd]))
 		return (1);
 	return (0);
 }
