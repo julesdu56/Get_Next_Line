@@ -55,7 +55,7 @@ int					get_next_line(const int fd, char **line)
 		return (-1);
 	if (!str[fd])
 		str[fd] = NULL;
-	while (!(ft_strichr(str[fd], '\n')) && (i = read(fd, buf, BUFF_SIZE)) > 0)
+	while ((i = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[i] = '\0';
 		ptr = str[fd];
