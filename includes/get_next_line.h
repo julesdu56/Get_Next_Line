@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/16 14:29:31 by jumourot          #+#    #+#             */
-/*   Updated: 2019/05/17 20:12:28 by jumourot         ###   ########.fr       */
+/*   Created: 2019/11/18 12:21:55 by jumourot          #+#    #+#             */
+/*   Updated: 2019/11/18 13:36:10 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
-{
-	unsigned int	i;
+int				get_next_line(int fd, char **line);
+char			*ft_strchr(const char *str, int c);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strcpy(char *dest, const char *src);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+static char		ft*concat_all(char *dest, char const *s1, char const *s2);
 
-	i = 0;
-	if (s == NULL || f == NULL)
-		return ;
-	while (s[i])
-	{
-		f(i, (s + i));
-		i++;
-	}
-}
+#endif
