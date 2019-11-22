@@ -12,45 +12,48 @@
 
 #include "get_next_line.h"
 
-static int			ft_checkend(char *str)
+static int		ft_strichr(char *str, char c)
 {
-	
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i] != c && str[i] != '\0')
+		i++;
+	return (i);
+}
+
+static	int		ft_checkendfile(char *str)
+{
 	if (ft_strchr(str, '\n'))
 	{
-		ft_strcpy(str, ft_strchr(str, '\n') + 1);
+		ft_strcpy(str, ft_strchr(str, '\n') + 1)
 		return (0);
 	}
-	if (ft_strichr(str, '\n'))
+	if(ft_strichr(str, '\n'))
 	{
 		ft_strcpy(str, ft_strchr(str, '\0'));
 		return (0);
 	}
-	return (1);
 }
 
-int					get_next_line(const int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
-
 	static char	*str[MAX_OPEN];
-	int			i;
-	char		buf[BUFF_SIZE + 1];
+	char		*buf;	
 	char		*ptr;
+	int		i;
 
-	if (fd < 0 || fd > MAX_OPEN || !line || BUFF_SIZE < 1
-			|| read(fd, buf, 0) == -1)
-		return (-1);
+	if (!line || fd < 0 || BUFF_SIZE < 1 || fd < MAX_OPEN 
+		|| read(fd, buf, 0) == -1)
 	if (!str[fd])
-		str[fd] = NULL;
-	while ((i = read(fd, buf, BUFF_SIZE)) > 0)
+		return (0);
+	while (i = read(fd, buf, BUFF_SIZE))
 	{
 		buf[i] = '\0';
-		ptr = str[fd];
-		if (!(str[fd] = ft_strjoin(ptr, buf)))
-			return (-1);
-		free(ptr);
-	}
-	*line = ft_strsub(str[fd], 0, ft_strichr(str[fd], '\n'));
-	if (!ft_checkend(str[fd]))
-		return (1);
-	return (0);
-}
+		ptr = buf[fd];
+		:
+
+
+}	

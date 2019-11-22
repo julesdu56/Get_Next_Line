@@ -33,4 +33,5 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
 		$(CC) $(CFLGS) $^ -o $@
+$(OBJS): $(
 
