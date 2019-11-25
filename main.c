@@ -1,4 +1,5 @@
 #include "get_next_line.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
 

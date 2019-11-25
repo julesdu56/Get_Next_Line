@@ -6,11 +6,12 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/25 12:37:03 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/11/25 14:15:41 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static	size_t		ft_strichr(char *str, char c)
 {
@@ -39,7 +40,7 @@ static	int		ft_checkendfile(char *str)
 	return (1);
 }
 
-int				get_next_line(int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static char	*str[MAX_OPEN];
 	char		buf[BUFFER_SIZE + 1];	
@@ -50,8 +51,8 @@ int				get_next_line(int fd, char **line)
 				|| read(fd, buf, 0) == -1)
 		return (-1);
 	if (!str[fd])
-		return (0);
-	while ((i = read(fd, buf, BUFFER_SIZE) > 0))
+		str[fd] = NULL;
+	while ((i = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[i] = '\0';
 		ptr = str[fd];
