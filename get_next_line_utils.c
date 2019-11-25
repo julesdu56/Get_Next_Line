@@ -6,11 +6,21 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:36:20 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/18 13:36:13 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/11/25 12:18:24 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t		ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
 char	*ft_strcpy(char *dest, const char *src)
 {
@@ -20,6 +30,23 @@ char	*ft_strcpy(char *dest, const char *src)
 	while (src[i] && dest[i])
 	{
 		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		i;
+	char	*dest;
+
+	i = 0;
+	if (!(dest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
+		return (NULL);
+	while (s1[i])
+	{
+ 		dest[i] = s1[i];
 		i++;
 	}
 	dest[i] = '\0';
@@ -67,33 +94,6 @@ char				*ft_strchr(const char *str, int c)
 		i++;
 	}
 	return (NULL);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	int		i;
-	char	*dest;
-
-	i = 0;
-	if (!(dest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
-		return (NULL);
-	while (s1[i])
-	{
- 		dest[i] = s1[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-size_t		ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
 }
 
 static char		*ft_concat_all(char *dest, char const *s1, char const *s2)

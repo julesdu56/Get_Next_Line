@@ -6,15 +6,15 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/19 14:17:04 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/11/25 12:37:03 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int		ft_strichr(char *str, char c)
+static	size_t		ft_strichr(char *str, char c)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -28,7 +28,7 @@ static	int		ft_checkendfile(char *str)
 {
 	if (ft_strchr(str, '\n'))
 	{
-		ft_strcpy(str, ft_strchr(str, '\n') + 1)
+		ft_strcpy(str, ft_strchr(str, '\n') + 1);
 		return (0);
 	}
 	if(ft_strichr(str, '\n'))
@@ -36,24 +36,31 @@ static	int		ft_checkendfile(char *str)
 		ft_strcpy(str, ft_strchr(str, '\0'));
 		return (0);
 	}
+	return (1);
 }
 
-int			get_next_line(int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
 	static char	*str[MAX_OPEN];
-	char		*buf;	
+	char		buf[BUFFER_SIZE + 1];	
 	char		*ptr;
-	int		i;
+	int			i;
 
-	if (!line || fd < 0 || BUFF_SIZE < 1 || fd < MAX_OPEN 
-		|| read(fd, buf, 0) == -1)
+	if (!line || fd < 0 || BUFFER_SIZE < 1 || fd > MAX_OPEN 
+				|| read(fd, buf, 0) == -1)
+		return (-1);
 	if (!str[fd])
 		return (0);
-	while (i = read(fd, buf, BUFF_SIZE))
+	while ((i = read(fd, buf, BUFFER_SIZE) > 0))
 	{
 		buf[i] = '\0';
-		ptr = buf[fd];
-		:
-
-
+		ptr = str[fd];
+		if (!(str[fd] = ft_strjoin(ptr, buf)))
+				return (-1);
+		free(ptr);
+	}	
+	*line = ft_substr(str[fd], 0, ft_strichr(str[fd], '\n'));
+	if (!ft_checkendfile(str[fd]))
+			return (1);
+	return (0);
 }	
