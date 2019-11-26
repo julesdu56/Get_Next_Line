@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:36:20 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/25 12:18:24 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:00:24 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ char				*ft_strchr(const char *str, int c)
 	unsigned int	i;
 
 	i = 0;
+	
+	if (!str || str == NULL)
+			return (NULL);
 	while (str[i])
 		i++;
 	if ((char)c == '\0')

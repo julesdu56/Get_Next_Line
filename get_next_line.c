@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/25 14:15:41 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/11/26 18:33:29 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ static	int		ft_checkendfile(char *str)
 	return (1);
 }
 
-int				get_next_line(const int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
-	static char	*str[MAX_OPEN];
+	static char	*str[OPEN_MAX];
 	char		buf[BUFFER_SIZE + 1];	
 	char		*ptr;
 	int			i;
-
-	if (!line || fd < 0 || BUFFER_SIZE < 1 || fd > MAX_OPEN 
+	
+	if (!line ||  fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX 
 				|| read(fd, buf, 0) == -1)
 		return (-1);
 	if (!str[fd])
 		str[fd] = NULL;
-	while ((i = read(fd, buf, BUFFER_SIZE)) > 0)
+	while (!(ft_strchr(str[fd], '\n')) && (i = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[i] = '\0';
 		ptr = str[fd];

@@ -6,15 +6,16 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:21:55 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/25 12:13:42 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:00:14 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define MAX_OPEN 4896
+
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
 
 int				get_next_line(int fd, char **line);
 char			*ft_strchr(const char *str, int c);
