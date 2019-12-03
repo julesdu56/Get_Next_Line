@@ -6,15 +6,15 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:36:20 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/26 16:00:24 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:50:22 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t		ft_strlen(const char *s)
+size_t				ft_strlen(const char *s)
 {
-	size_t	i;
+	size_t			i;
 
 	i = 0;
 	while (s[i])
@@ -22,41 +22,27 @@ size_t		ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strcpy(char *dest, const char *src)
+char				*ft_strdup(const char *s1)
 {
-	int i;
-
-	i = 0;
-	while (src[i] && dest[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	int		i;
-	char	*dest;
+	int				i;
+	char			*dest;
 
 	i = 0;
 	if (!(dest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
 		return (NULL);
 	while (s1[i])
 	{
- 		dest[i] = s1[i];
+		dest[i] = s1[i];
 		i++;
 	}
 	dest[i] = '\0';
 	return (dest);
 }
 
-char		*ft_substr(char const *s, unsigned int start, size_t len)
+char				*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	char	*s2;
+	size_t			i;
+	char			*s2;
 
 	if (s == NULL)
 		return (NULL);
@@ -77,32 +63,10 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 	return (s2);
 }
 
-char				*ft_strchr(const char *str, int c)
+static char			*ft_concat_all(char *dest, char const *s1, char const *s2)
 {
 	unsigned int	i;
-
-	i = 0;
-	
-	if (!str || str == NULL)
-			return (NULL);
-	while (str[i])
-		i++;
-	if ((char)c == '\0')
-		return ((char *)&str[i]);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == (char)c)
-			return ((char *)&str[i]);
-		i++;
-	}
-	return (NULL);
-}
-
-static char		*ft_concat_all(char *dest, char const *s1, char const *s2)
-{
-	unsigned int i;
-	unsigned int j;
+	unsigned int	j;
 
 	i = 0;
 	j = 0;
@@ -123,10 +87,10 @@ static char		*ft_concat_all(char *dest, char const *s1, char const *s2)
 	return (dest);
 }
 
-char			*ft_strjoin(char const *s1, char const *s2)
+char				*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*dest;
-	size_t	len;
+	char			*dest;
+	size_t			len;
 
 	dest = NULL;
 	if (!s1 && !s2)

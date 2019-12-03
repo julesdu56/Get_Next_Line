@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 15:40:31 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/26 17:01:52 by jumourot         ###   ########.fr       */
+/*   Created: 2019/12/02 16:35:06 by jumourot          #+#    #+#             */
+/*   Updated: 2019/12/03 13:29:11 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int main(int argc, char **argv)
 	{
 		printf("%s\n", line);
 		free(line);
+		line = NULL;
 	}
+	printf("%d\n", get_next_line(fd, &line));
 	return (0);
 }
+
