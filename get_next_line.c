@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2019/12/03 13:28:34 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/12/04 13:49:38 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int			ft_checkendfile(char *str)
 	if (ft_strichr(str, '\n'))
 	{
 		ft_strcpy(str, ft_strchr(str, '\0'));
-		return (0);
+		return (1);
 	}
 	return (1);
 }
@@ -86,7 +86,7 @@ int					get_next_line(int fd, char **line)
 		return (-1);
 	if (!str[fd])
 		str[fd] = NULL;
-	while ((i = read(fd, buf, BUFFER_SIZE)) > 0)
+	while (!(ft_strchr(str[fd], '\n')) && ((i = read(fd, buf, BUFFER_SIZE)) > 0))
 	{
 		buf[i] = '\0';
 		ptr = str[fd];
