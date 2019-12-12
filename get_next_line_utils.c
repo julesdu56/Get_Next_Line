@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:36:20 by jumourot          #+#    #+#             */
-/*   Updated: 2019/11/27 14:50:22 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/12/12 12:46:20 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (s == NULL)
 		return (NULL);
-	if (ft_strlen(s) < start)
-		return (ft_strdup(""));
 	if (!(s2 = (char*)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	if (s2 == NULL)
 		return (NULL);
 	i = 0;
 	s2[len] = '\0';

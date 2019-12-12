@@ -6,11 +6,12 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2019/12/04 13:49:38 by jumourot         ###   ########.fr       */
+/*   Updated: 2019/12/12 14:36:34 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char				*ft_strchr(const char *str, int c)
 {
@@ -19,11 +20,6 @@ char				*ft_strchr(const char *str, int c)
 	i = 0;
 	if (!str || str == NULL)
 		return (NULL);
-	while (str[i])
-		i++;
-	if ((char)c == '\0')
-		return ((char *)&str[i]);
-	i = 0;
 	while (str[i])
 	{
 		if (str[i] == (char)c)
@@ -54,7 +50,7 @@ static size_t		ft_strichr(char *str, char c)
 	i = 0;
 	if (!str)
 		return (0);
-	while (str[i] != c && str[i] != '\0')
+	while (str[i] != '\0' && str[i] != c)
 		i++;
 	return (i);
 }
@@ -66,10 +62,10 @@ static int			ft_checkendfile(char *str)
 		ft_strcpy(str, ft_strchr(str, '\n') + 1);
 		return (0);
 	}
-	if (ft_strichr(str, '\n'))
+	else if (ft_strichr(str, '\n'))
 	{
-		ft_strcpy(str, ft_strchr(str, '\0'));
-		return (1);
+		ft_strcpy(str, &(str[ft_strichr(str, '\0')]));
+		return (0);
 	}
 	return (1);
 }
@@ -81,12 +77,12 @@ int					get_next_line(int fd, char **line)
 	char			*ptr;
 	int				i;
 
-	if (!line || fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX
-		|| read(fd, buf, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX || !line
+			|| read(fd, buf, 0) == -1)
 		return (-1);
 	if (!str[fd])
 		str[fd] = NULL;
-	while (!(ft_strchr(str[fd], '\n')) && ((i = read(fd, buf, BUFFER_SIZE)) > 0))
+	while (!(ft_strchr(str[fd], '\n')) && (i = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[i] = '\0';
 		ptr = str[fd];
