@@ -6,12 +6,11 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2019/12/12 14:36:34 by jumourot         ###   ########.fr       */
+/*   Updated: 2020/01/16 15:40:00 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char				*ft_strchr(const char *str, int c)
 {
@@ -65,7 +64,7 @@ static int			ft_checkendfile(char *str)
 	else if (ft_strichr(str, '\n'))
 	{
 		ft_strcpy(str, &(str[ft_strichr(str, '\0')]));
-		return (0);
+		return (1);
 	}
 	return (1);
 }
@@ -81,7 +80,7 @@ int					get_next_line(int fd, char **line)
 			|| read(fd, buf, 0) == -1)
 		return (-1);
 	if (!str[fd])
-		str[fd] = NULL;
+		str[fd] = ft_strdup("");
 	while (!(ft_strchr(str[fd], '\n')) && (i = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[i] = '\0';

@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 16:35:06 by jumourot          #+#    #+#             */
-/*   Updated: 2019/12/04 13:50:37 by jumourot         ###   ########.fr       */
+/*   Updated: 2020/01/16 15:19:09 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
-
-int		main(int argc, char **argv)
+int main(int ac, char **av)
 {
-	int		fd;
-	char	*line;
-
-	(void)argc;
-	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
+	char *line;
+	int fd;
+	if (ac > 1)
 	{
-			printf("%s\n", line);
+		fd = open(av[1], O_RDONLY);
+		int ret = 1;
+		while (ret > 0)
+		{
+			ret = get_next_line(fd, &line);
+			printf("ret : %d, line : [%s]\n", ret, line);
 			free(line);
-			line = NULL;
+		}
 	}
 	return (0);
 }
