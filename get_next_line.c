@@ -6,11 +6,15 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2020/01/16 15:40:00 by jumourot         ###   ########.fr       */
+/*   Updated: 2020/01/21 12:18:04 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "get_next_line.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
 
 char				*ft_strchr(const char *str, int c)
 {
@@ -44,14 +48,16 @@ char				*ft_strcpy(char *dest, const char *src)
 
 static size_t		ft_strichr(char *str, char c)
 {
-	size_t			i;
+		size_t			i;
 
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] != '\0' && str[i] != c)
-		i++;
-	return (i);
+		i = 0;
+		if (!str)
+			return (0);
+		if (str[0] == '\n')
+			return (1);
+		while (str[i] != '\0' && str[i] != c)
+			i++;
+		return (i);
 }
 
 static int			ft_checkendfile(char *str)
@@ -95,5 +101,25 @@ int					get_next_line(int fd, char **line)
 	*line = ft_substr(str[fd], 0, ft_strichr(str[fd], '\n'));
 	if (!ft_checkendfile(str[fd]))
 		return (1);
+	ft_chausette(fd, str[fd], *line);
+	return (0);
+}
+
+int main(int ac, char **av)
+{
+	char *line;
+	int fd = open(av[1], O_RDONLY);
+	int ret;
+
+	(void)ac;
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		printf("%d %s\n", ret, line);
+		free(line);
+	}
+ 	printf("%d %s\n\n", ret, line);
+	free(line);
+	close(fd);
+	system("leaks a.out");
 	return (0);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 12:36:20 by jumourot          #+#    #+#             */
-/*   Updated: 2020/01/16 15:38:43 by jumourot         ###   ########.fr       */
+/*   Created: 2020/01/17 11:58:48 by jumourot          #+#    #+#             */
+/*   Updated: 2020/01/17 11:59:03 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t				ft_strlen(const char *s)
 {
@@ -44,7 +44,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t			i;
 	char			*s2;
 
-	if (s == NULL)
+	if (s == NULL || len < 0)
 		return (NULL);
 	if (!(s2 = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
