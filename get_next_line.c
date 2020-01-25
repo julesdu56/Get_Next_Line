@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2020/01/21 12:18:04 by jumourot         ###   ########.fr       */
+/*   Updated: 2020/01/25 17:27:26 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int					get_next_line(int fd, char **line)
 	*line = ft_substr(str[fd], 0, ft_strichr(str[fd], '\n'));
 	if (!ft_checkendfile(str[fd]))
 		return (1);
-	ft_chausette(fd, str[fd], *line);
+	ft_endof(fd, str, line);
 	return (0);
 }
 
