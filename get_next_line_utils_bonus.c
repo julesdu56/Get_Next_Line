@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 11:58:48 by jumourot          #+#    #+#             */
-/*   Updated: 2020/01/17 11:59:03 by jumourot         ###   ########.fr       */
+/*   Created: 2020/02/05 14:00:13 by jumourot          #+#    #+#             */
+/*   Updated: 2020/02/05 14:01:35 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t			i;
 	char			*s2;
 
-	if (s == NULL || len < 0)
+	if (s == NULL || len <= 0)
 		return (NULL);
 	if (!(s2 = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
@@ -59,45 +59,28 @@ char				*ft_substr(char const *s, unsigned int start, size_t len)
 	return (s2);
 }
 
-static char			*ft_concat_all(char *dest, char const *s1, char const *s2)
+char				*ft_strjoin(const char *s1, char const *s2)
 {
-	unsigned int	i;
-	unsigned int	j;
+	char			*tmp;
+	size_t			size;
 
-	i = 0;
-	j = 0;
-	if (!dest)
+	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	while (s1[j])
-	{
-		dest[j] = s1[j];
-		j++;
-	}
-	while (s2[i])
-	{
-		dest[j] = s2[i];
-		j++;
-		i++;
-	}
-	dest[j] = '\0';
-	return (dest);
+	size = (ft_strlen(s1) + ft_strlen(s2));
+	if (!(tmp = (char *)malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	while (*s1)
+		*tmp++ = *s1++;
+	while (*s2)
+		*tmp++ = *s2++;
+	*tmp = '\0';
+	return (tmp - size);
 }
 
-char				*ft_strjoin(char const *s1, char const *s2)
+void				ft_endof(int fd, char **str, char **line)
 {
-	char			*dest;
-	size_t			len;
-
-	dest = NULL;
-	if (!s1 && !s2)
-		return (dest);
-	if (!s1)
-		return (ft_strdup(s2));
-	if (!s2)
-		return (ft_strdup(s1));
-	len = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
-	if (!(dest = malloc(sizeof(char) * len)))
-		return (NULL);
-	ft_concat_all(dest, s1, s2);
-	return (dest);
+	if (*line == NULL)
+		*line = ft_strdup(str[fd]);
+	free(str[fd]);
+	str[fd] = NULL;
 }

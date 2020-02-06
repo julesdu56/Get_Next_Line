@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 12:36:20 by jumourot          #+#    #+#             */
-/*   Updated: 2020/01/25 17:25:09 by jumourot         ###   ########.fr       */
+/*   Updated: 2020/02/05 13:32:44 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ char				*ft_substr(char const *s, unsigned int start, size_t len)
 	return (s2);
 }
 
-char	*ft_strjoin(const char *s1, char const *s2)
+char				*ft_strjoin(const char *s1, char const *s2)
 {
-	char	*tmp;
-	size_t	size;
+	char			*tmp;
+	size_t			size;
+
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	size = (ft_strlen(s1) + ft_strlen(s2));
@@ -76,7 +77,7 @@ char	*ft_strjoin(const char *s1, char const *s2)
 	return (tmp - size);
 }
 
-void		ft_endof(int fd, char **str, char **line)
+void				ft_endof(int fd, char **str, char **line)
 {
 	if (*line == NULL)
 		*line = ft_strdup(str[fd]);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 12:21:55 by jumourot          #+#    #+#             */
-/*   Updated: 2020/01/25 17:20:49 by jumourot         ###   ########.fr       */
+/*   Created: 2020/02/05 13:42:33 by jumourot          #+#    #+#             */
+/*   Updated: 2020/02/05 13:57:56 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <unistd.h>
 # include <limits.h>
 
-int				get_next_line(int fd, char **line);
+void			ft_endof(int fd, char **str, char **line);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strcpy(char *dest, const char *src);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strdup(const char *s1);
-void			ft_endof(int fd, char **str, char **line);
+int				get_next_line(int fd, char **line);
 
 #endif

@@ -5,16 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 12:33:37 by jumourot          #+#    #+#             */
-/*   Updated: 2020/01/25 17:27:26 by jumourot         ###   ########.fr       */
+/*   Created: 2020/02/05 13:41:20 by jumourot          #+#    #+#             */
+/*   Updated: 2020/02/05 13:41:37 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "get_next_line.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
 
 char				*ft_strchr(const char *str, int c)
 {
@@ -48,16 +44,16 @@ char				*ft_strcpy(char *dest, const char *src)
 
 static size_t		ft_strichr(char *str, char c)
 {
-		size_t			i;
+	size_t			i;
 
-		i = 0;
-		if (!str)
-			return (0);
-		if (str[0] == '\n')
-			return (1);
-		while (str[i] != '\0' && str[i] != c)
-			i++;
-		return (i);
+	i = 0;
+	if (!str)
+		return (0);
+	if (str[0] == '\n')
+		return (1);
+	while (str[i] != '\0' && str[i] != c)
+		i++;
+	return (i);
 }
 
 static int			ft_checkendfile(char *str)
@@ -82,8 +78,7 @@ int					get_next_line(int fd, char **line)
 	char			*ptr;
 	int				i;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX || !line
-			|| read(fd, buf, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX || !line)
 		return (-1);
 	if (!str[fd])
 		str[fd] = ft_strdup("");
@@ -102,24 +97,5 @@ int					get_next_line(int fd, char **line)
 	if (!ft_checkendfile(str[fd]))
 		return (1);
 	ft_endof(fd, str, line);
-	return (0);
-}
-
-int main(int ac, char **av)
-{
-	char *line;
-	int fd = open(av[1], O_RDONLY);
-	int ret;
-
-	(void)ac;
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		printf("%d %s\n", ret, line);
-		free(line);
-	}
- 	printf("%d %s\n\n", ret, line);
-	free(line);
-	close(fd);
-	system("leaks a.out");
 	return (0);
 }

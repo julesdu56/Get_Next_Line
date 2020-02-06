@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 11:56:28 by jumourot          #+#    #+#             */
-/*   Updated: 2020/01/17 11:57:22 by jumourot         ###   ########.fr       */
+/*   Created: 2020/02/05 13:43:58 by jumourot          #+#    #+#             */
+/*   Updated: 2020/02/05 13:59:14 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static size_t		ft_strichr(char *str, char c)
 	i = 0;
 	if (!str)
 		return (0);
+	if (str[0] == '\n')
+		return (1);
 	while (str[i] != '\0' && str[i] != c)
 		i++;
 	return (i);
@@ -76,8 +78,7 @@ int					get_next_line(int fd, char **line)
 	char			*ptr;
 	int				i;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX || !line
-			|| read(fd, buf, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX || !line)
 		return (-1);
 	if (!str[fd])
 		str[fd] = ft_strdup("");
@@ -95,5 +96,6 @@ int					get_next_line(int fd, char **line)
 	*line = ft_substr(str[fd], 0, ft_strichr(str[fd], '\n'));
 	if (!ft_checkendfile(str[fd]))
 		return (1);
+	ft_endof(fd, str, line);
 	return (0);
 }
