@@ -6,11 +6,12 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 13:41:20 by jumourot          #+#    #+#             */
-/*   Updated: 2020/02/05 13:41:37 by jumourot         ###   ########.fr       */
+/*   Updated: 2020/02/07 16:24:08 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char				*ft_strchr(const char *str, int c)
 {
@@ -50,7 +51,7 @@ static size_t		ft_strichr(char *str, char c)
 	if (!str)
 		return (0);
 	if (str[0] == '\n')
-		return (1);
+		return (0);
 	while (str[i] != '\0' && str[i] != c)
 		i++;
 	return (i);
@@ -78,7 +79,8 @@ int					get_next_line(int fd, char **line)
 	char			*ptr;
 	int				i;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX || !line)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX || !line
+			|| read(fd, buf, 0) == -1)
 		return (-1);
 	if (!str[fd])
 		str[fd] = ft_strdup("");
@@ -94,6 +96,8 @@ int					get_next_line(int fd, char **line)
 		free(ptr);
 	}
 	*line = ft_substr(str[fd], 0, ft_strichr(str[fd], '\n'));
+	if (*line == NULL)
+		*line = ft_strdup("");
 	if (!ft_checkendfile(str[fd]))
 		return (1);
 	ft_endof(fd, str, line);
