@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 13:41:20 by jumourot          #+#    #+#             */
-/*   Updated: 2020/02/07 16:24:08 by jumourot         ###   ########.fr       */
+/*   Updated: 2020/02/10 12:41:39 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,30 +76,21 @@ int					get_next_line(int fd, char **line)
 {
 	static char		*str[OPEN_MAX];
 	char			buf[BUFFER_SIZE + 1];
-	char			*ptr;
-	int				i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX || !line
 			|| read(fd, buf, 0) == -1)
 		return (-1);
 	if (!str[fd])
 		str[fd] = ft_strdup("");
-	while (!(ft_strchr(str[fd], '\n')) && (i = read(fd, buf, BUFFER_SIZE)) > 0)
+	if (ft_for_read(fd, buf, str) == -1)
 	{
-		buf[i] = '\0';
-		ptr = str[fd];
-		if (!(str[fd] = ft_strjoin(ptr, buf)))
-		{
-			free(ptr);
-			return (-1);
-		}
-		free(ptr);
+		free(str[fd]);
+		return (-1);
 	}
 	*line = ft_substr(str[fd], 0, ft_strichr(str[fd], '\n'));
 	if (*line == NULL)
 		*line = ft_strdup("");
 	if (!ft_checkendfile(str[fd]))
 		return (1);
-	ft_endof(fd, str, line);
 	return (0);
 }

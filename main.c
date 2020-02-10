@@ -6,7 +6,7 @@
 /*   By: jumourot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 16:16:37 by jumourot          #+#    #+#             */
-/*   Updated: 2020/02/07 17:13:04 by jumourot         ###   ########.fr       */
+/*   Updated: 2020/02/10 13:09:59 by jumourot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int main(int ac, char **av)
 	int fd = open(av[1], O_RDONLY);
 	int ret = 1;
 	
+	(void)**av;
 	(void)ac;
 	while (ret > 0)
 	{
